@@ -1,23 +1,21 @@
-DeepTalk
+A Vocal Style Neutral Network for Recognizing Speaker Emotions
 ===============================
 
-PyTorch implementation of the DeepTalk model described in *DeepTalk: Vocal Style Encoding for Speaker Recognition and Speech Synthesis* by A. Chowdhury, A. Ross, and P. David in IEEE International Conference on Acoustics, Speech and Signal Processing 2021 (ICASSP-2021).
+A Speech Emotion Recognition System that uses Vocal Style embeddings as features. The network used for encoding embeddings is based on the implementation of the architecture described in *A Neural Network for Recognizing Speaker Emotions* by M. Sandler and A. Ross. This program provides utilities and scripts to transfer knowledge learned to the Speech Emotion Recognition Domain.
 
 ## Research Article
 
-[Anurag Chowdhury](https://github.com/ChowdhuryAnurag), [Arun Ross](http://www.cse.msu.edu/~rossarun/), and [Prabu David](https://comartsci.msu.edu/our-people/prabu-david), *DeepTalk: Vocal Style Encoding for Speaker Recognition and Speech Synthesis*, IEEE International Conference on Acoustics, Speech and Signal Processing (2021).  
-
-- arXiv: [https://arxiv.org/abs/2012.05084](https://arxiv.org/abs/2012.05084)
+[Morgan Sandler](https://github.com/morganlee123), [Arun Ross](http://www.cse.msu.edu/~rossarun/), *A Neural Network for Recognizing Speaker Emotions*
+- arXiv: [COMING SOON](https://arxiv.org/abs/2012.05084)
 
 ## Description
 
-DeepTalk is a deep-learning based vocal style transfer model developed by A. Chowdhury, A. Ross, and P. David, at Michigan State University.
-The model requires a reference audio from a target speaker and a sample text to synthesize speech audio that mimics the vocal identity of the target speaker uttering the sample text. 
-
-![DeepTalk Model](/images/DeepTalk.png)
+add description here
 
 
 **Downloading the DeepTalk code**
+
+REFINE THESE INSTRUCTIONS
 
 1) Clone the git repository
 
@@ -86,57 +84,6 @@ unzip trained_models.zip
                     corpus_directory dictionary_path acoustic_model_path
                     output_directory
     mfa_align: error: the following arguments are required: corpus_directory, dictionary_path, acoustic_model_path, output_directory
-    ```
-
-**Running the DeepTalk GUI to generate synthetic audio using pre-trained models received from the code maintainer**
-
-Note: You should already be inside 'DeepTalk-Deployment' directory with 'deeptalk' conda environment activated.
-
-1) Execute the following two commands to run the GUI prototype
-```
-export FLASK_APP=app.py
-flask run
-```
-
-You should now be able to access the GUI prototype in your web browser at the below URL:
-```
-http://localhost:5000/
-```
-
-
-**Finetuning the DeepTalk model for a target speaker**
-
-1) The DeepTalk model can be finetuned to mimic the voice of a target speaker of your choice. For this process, you will need to place high quality audio wave files containing speech from the target speaker in *Data/SampleAudio directory* as follows:
-```
-Data/SampleAudio/<speaker_name>/<fileid_subjectname_audiotitle.wav>
-```
-Example:
-```
-Data/SampleAudio/Speaker1/1_Speaker1_BroadcastIndustry.wav
-```
-We have included few sample audios (through the *trained_model.zip*) following the directory format specified above, to serve as a reference. These sample audios can be listed using the following command:
-```
-ls Data/SampleAudio/Speaker1/
-```
-
-3) Run *preprocess_audio.py <input_directory> <output_directory>* to preprocess the audio from previous step to make it compatible for fine-tuning the DeepTalk model.
-```
-python preprocess_audio.py Data/SampleAudio Data/ProcessedAudio
-```
-The processed audio will be saved at *Data/LibriSpeech/train-other-custom/<speaker_name>*
-
-4) Run *train_DeepTalk_step1.py <preprocessed_audio_directory>* to use the preprocessed audio to fine-tune the Synthesizer of the DeepTalk model.
-```
-python train_DeepTalk_step1.py Data/LibriSpeech/train-other-custom/Speaker1
-```
-
-5) Run *train_DeepTalk_step2.py <preprocessed_audio_directory>* to use the preprocessed audio to fine-tune the Vocoder of the DeepTalk model.
-```
-python train_DeepTalk_step2.py Data/LibriSpeech/train-other-custom/Speaker1
-```
-
-6) A fine-tuned model directory bearing the <speaker_name> should now appear in the trained_models directory
-
 
 **Acknowledgement**
 
